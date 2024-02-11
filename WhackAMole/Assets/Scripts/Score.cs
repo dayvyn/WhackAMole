@@ -8,10 +8,12 @@ public class Score : MonoBehaviour
 {
     public TMP_Text scoreText;
     public TMP_Text highScoreText;
+    public TMP_Text gameTimeText;
     Mole mole;
     int value;
     int score;
     int highScore;
+    float gameTimer = 31;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,8 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        gameTimer -= Time.deltaTime;
+        gameTimeText.text = "Time Left: " + (int)gameTimer;
     }
 
     public void Scored(GameObject m)

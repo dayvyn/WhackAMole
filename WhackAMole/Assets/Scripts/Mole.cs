@@ -11,6 +11,7 @@ public class Mole : MonoBehaviour
     SpriteRenderer moleSprite;
     Score score;
     float timeRange;
+    float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,11 @@ public class Mole : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        if (timer > timeRange)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void setValue(int num)
@@ -31,12 +36,15 @@ public class Mole : MonoBehaviour
         if (num < 5)
         {
             value = 1;
-            timeRange = Random.Range(2, 3);
+            timeRange = Random.Range(1.5f, 2.3f);
+            timer = 0;
         }
         else
         {
             value = 3;
             moleSprite.color = moleColor;
+            timeRange = Random.Range(1, 1.5f);
+            timer = 0;
         }
     }
 
