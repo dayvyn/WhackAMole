@@ -15,7 +15,7 @@ public class MoleSpawner : MonoBehaviour
     int randomPositionY;
     Vector3 spawnPoint;
     [SerializeField] float lowerBound = 1.0f;
-    float upperBound = 2.0f;
+    float upperBound = 1.5f;
     float worldTimer;
     int worldTimerInt;
     Score scoreManager;

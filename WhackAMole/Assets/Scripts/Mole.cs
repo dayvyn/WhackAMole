@@ -10,8 +10,9 @@ public class Mole : MonoBehaviour
     Color moleColor = new Color(255,255,0);
     SpriteRenderer moleSprite;
     Score score;
-    float despawnRange;
+    [SerializeField]float despawnRange;
     float timer;
+    [SerializeField]float timerCheck;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class Mole : MonoBehaviour
         randomMole = Random.Range(1, 6);
         setValue(randomMole);
         score = FindAnyObjectByType<Score>().GetComponent<Score>();
+        timerCheck = score.GetTimer();
     }
 
     // Update is called once per frame
@@ -36,14 +38,31 @@ public class Mole : MonoBehaviour
         if (num < 5)
         {
             value = 1;
-            despawnRange = Random.Range(1.5f, 2.3f);
+            if (timerCheck > 20)
+            {
+                despawnRange = Random.Range(1.5f, 2.3f);
+            }
+            else if(timerCheck > 10){
+                despawnRange = Random.Range(1.2f, 2.0f);
+            }
+            else
+            {
+                despawnRange = Random.Range(.9f, 1.7f);
+            }
             timer = 0;
         }
         else
         {
             value = 3;
             moleSprite.color = moleColor;
-            despawnRange = Random.Range(1, 1.5f);
+            if (timerCheck > 15)
+            {
+                despawnRange = Random.Range(0.9f, 1.7f);
+            }
+            else
+            {
+                despawnRange = Random.Range(0.6f, 1.4f);
+            }
             timer = 0;
         }
     }

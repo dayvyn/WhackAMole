@@ -6,9 +6,9 @@ using TMPro;
 
 public class Score : MonoBehaviour
 {
-    public TMP_Text scoreText;
-    public TMP_Text highScoreText;
-    public TMP_Text gameTimeText;
+    [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text highScoreText;
+    [SerializeField] TMP_Text gameTimeText;
     Mole mole;
     int value;
     int score;
