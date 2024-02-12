@@ -45,4 +45,12 @@ public class Score : MonoBehaviour
     {
         Destroy(m);
     }
+    public int GetScore()
+    {
+        return score;
+    }
+    public float GetTimer()
+    {
+        return gameTimer;
+    }
 }

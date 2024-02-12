@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MoleSpawner : MonoBehaviour
 {
@@ -15,11 +16,14 @@ public class MoleSpawner : MonoBehaviour
     Vector3 spawnPoint;
     [SerializeField] float lowerBound = 1.0f;
     float upperBound = 2.0f;
-    [SerializeField]float worldTimer;
-    [SerializeField] int worldTimerInt;
+    float worldTimer;
+    int worldTimerInt;
+    Score scoreManager;
     // Start is called before the first frame update
     void Start()
     {
+        scoreManager = GetComponent<Score>();
+        worldTimer = scoreManager.GetTimer();
         randomTime = Random.Range(lowerBound, upperBound);
     }
 
@@ -27,7 +31,7 @@ public class MoleSpawner : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        worldTimer += Time.deltaTime;
+        worldTimer -= Time.deltaTime;
         difficultyTimer += Time.deltaTime;
         if (timer > randomTime)
         {
@@ -42,6 +46,11 @@ public class MoleSpawner : MonoBehaviour
         {
             DifficultyIncrease();
             difficultyTimer = 0;
+        }
+        if ((int)worldTimer <= 0)
+        {
+            PlayerPrefs.SetInt("Score", scoreManager.GetScore());
+            SceneManager.LoadScene("GameOver");
         }
     }
     void DifficultyIncrease()
